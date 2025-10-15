@@ -7,5 +7,5 @@ export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
   // The nextjs dashboard tutorial recommended the 'nodejs' runtime, but this was creating build errors.
-  runtime: 'edge',
+  runtime: 'experimental-edge',
 };
