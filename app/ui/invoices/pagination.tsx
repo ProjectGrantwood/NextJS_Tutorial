@@ -16,13 +16,10 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   }
-  // NOTE: Uncomment this code in Chapter 11
 
   const allPages = generatePagination(currentPage, totalPages);
 
   return (
-    <>
-
       <div className="inline-flex">
         <PaginationArrow
           direction="left"
@@ -57,7 +54,6 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           isDisabled={currentPage >= totalPages}
         />
       </div>
-    </>
   );
 }
 
