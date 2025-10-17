@@ -102,7 +102,7 @@ export default function DashboardSkeleton() {
   );
 }
 
-export function TableRowSkeleton() {
+export function InvoiceTableRowSkeleton() {
   return (
     <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
       {/* Customer Name and Image */}
@@ -203,12 +203,127 @@ export function InvoicesTableSkeleton() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function CustomerTableRowSkeleton() {
+  return (
+    <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
+      {/* Customer Name and Image */}
+      <td className="relative overflow-hidden whitespace-nowrap py-5 pl-4 pr-3 group-first-of-type:rounded-md group-last-of-type:rounded-md">
+        <div className="flex items-center gap-3">
+          <div className="h-[28px] w-[28px] rounded-full bg-gray-100"></div>
+          <div className="h-6 w-28 rounded bg-gray-100"></div>
+        </div>
+      </td>
+      {/* Email */}
+      <td className="whitespace-nowrap px-4 py-5">
+        <div className="h-6 w-32 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Invoices */}
+      <td className="whitespace-nowrap px-4 py-5">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Pending */}
+      <td className="whitespace-nowrap px-4 py-5">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Paid */}
+      <td className="whitespace-nowrap px-4 py-5 group-first-of-type:rounded-md group-last-of-type:rounded-md">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </td>
+    </tr>
+  );
+}
+
+export function CustomersMobileSkeleton() {
+  return (
+    <div className="mb-2 w-full rounded-md bg-white p-4">
+      <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+        {/* Customer Image, Name, & Email */}
+        <div className="flex flex-col">
+          <div className="flex items-center">
+            {/* Customer Image */}
+            <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+            {/* Customer Name */}
+            <div className="h-6 w-16 rounded bg-gray-100"></div>
+          </div>
+          {/* Customer email */}
+          <div className="h-6 w-32 mt-2 rounded bg-gray-100"></div>
+        </div>
+      </div>
+      {/* Pending & Paid Invoices */}
+      <div className="flex flex-row w-full items-start justify-between pt-4 border-b border-gray-100 pb-4">
+        {/* Pending */}
+        <div className="flex w-1/2 flex-col">
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+        {/* Paid */}
+        <div className="flex w-1/2 flex-col">
+          <div className="h-6 w-16 rounded bg-gray-100"></div>
+          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+      </div>
+      {/* Total Invoices */}
+      <div className="mb-2 w-full rounded-md bg-white pt-4">
+        <div className="h-6 w-8 rounded bg-gray-100"></div>
+      </div>
+    </div>
+  );
+}
+
+export function CustomersTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            <CustomersMobileSkeleton />
+            <CustomersMobileSkeleton />
+            <CustomersMobileSkeleton />
+            <CustomersMobileSkeleton />
+            <CustomersMobileSkeleton />
+            <CustomersMobileSkeleton />
+          </div>
+          <table className="hidden min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Name
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Email
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Invoices
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Pending
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Paid
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <CustomerTableRowSkeleton />
+              <CustomerTableRowSkeleton />
+              <CustomerTableRowSkeleton />
+              <CustomerTableRowSkeleton />
+              <CustomerTableRowSkeleton />
+              <CustomerTableRowSkeleton />
             </tbody>
           </table>
         </div>

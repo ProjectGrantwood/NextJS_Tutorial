@@ -4,6 +4,7 @@ import Pagination from '@/app/ui/invoices/pagination';
 import { Suspense } from 'react';
 import { fetchCustomersPages } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
+import { CustomersTableSkeleton } from '@/app/ui/skeletons';
 
 export default async function Page(props: {
     searchParams?: Promise<{
@@ -23,7 +24,7 @@ export default async function Page(props: {
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Search customers..." />
             </div>
-            <Suspense key={query + currentPage} fallback={<div>My Fallback</div>}>
+            <Suspense key={query + currentPage} fallback={<CustomersTableSkeleton />}>
                 <CustomersTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
