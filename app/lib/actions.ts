@@ -117,6 +117,13 @@ export async function deleteInvoice(id: string) {
 
 }
 
+// ADD NEW CUSTOMER
+
+export async function addCustomer() {
+    revalidatePath('/dashboard/customers')
+    redirect('/dashboard/customers')
+}
+
 // AUTHENTICATION
 
 export async function authenticate(
