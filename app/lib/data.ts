@@ -208,6 +208,22 @@ export async function fetchFilteredCustomers(query: string) {
   }
 }
 
+export async function customerHasInvoices(id: string) {
+  try {
+    const data = await sql`
+      SELECT customers.id, COUNT(invoices.id)
+      FROM customers
+      LEFT JOIN invoices ON customers.id = invoices.customer_id
+      WHERE customers.id = ${id}
+      GROUP BY customers.id
+    `
+    return Number(data[0].count);
+  } catch (err) {
+    console.error('Database Error: ', err);
+    throw new Error(`Failed to count invoices associated with id ${id}`)
+  }
+}
+
 export async function fetchCustomersPages(query: string) {
   try {
     const data = await sql`SELECT COUNT(*)

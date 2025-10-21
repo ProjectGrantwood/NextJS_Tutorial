@@ -1,4 +1,4 @@
-import Form from '@/app/ui/invoices/create-form';
+import InvoiceForm from '@/app/ui/invoices/create-form';
 import Breadcrumbs from '@/app/ui/breadcrumbs';
 import { fetchCustomers } from '@/app/lib/data';
  
@@ -17,7 +17,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form customers={customers} />
+      <InvoiceForm customers={customers} />
     </main>
   );
 }
