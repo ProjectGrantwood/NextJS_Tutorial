@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestInvoices } from '@/app/lib/data';
+import CustomerImagePlaceholder from '@/app/ui/dashboard/customer-image-placeholder';
 
 export default async function LatestInvoices() {
   const latestInvoices = await fetchLatestInvoices();
@@ -27,13 +28,20 @@ export default async function LatestInvoices() {
                 )}
               >
                 <div className="flex items-center">
-                  <Image
-                    src={invoice.image_url}
-                    alt={`${invoice.name}'s profile picture`}
-                    className="mr-4 rounded-full"
-                    width={32}
-                    height={32}
-                  />
+                  {
+                  invoice.image_url.length > 0 ? 
+                    <Image
+                      src={invoice.image_url}
+                      alt={`${invoice.name}'s profile picture`}
+                      className="mr-4 rounded-full"
+                      width={28}
+                      height={28}
+                    />
+                    :
+                    <div className="mr-4">
+                    <CustomerImagePlaceholder name={invoice.name} />
+                    </div>
+                  }
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
                       {invoice.name}

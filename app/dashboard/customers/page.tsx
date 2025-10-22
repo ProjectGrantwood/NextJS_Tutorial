@@ -1,6 +1,6 @@
 import CustomersTable from '@/app/ui/customers/table';
 import Search from '@/app/ui/search';
-import Pagination from '@/app/ui/invoices/pagination';
+import Pagination from '@/app/ui/pagination';
 import { Suspense } from 'react';
 import { fetchCustomersPages } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
