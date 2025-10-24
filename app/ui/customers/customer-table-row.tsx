@@ -74,6 +74,7 @@ export function MobileCustomerRow({ customer }: { customer: FormattedCustomersTa
         <div className="flex items-center justify-between border-b pb-4">
             <div>
             <div className="mb-2 flex items-center">
+                
                 <div className="flex items-center gap-3">
                 {
                 customer.image_url.length > 0 ? 
@@ -88,7 +89,7 @@ export function MobileCustomerRow({ customer }: { customer: FormattedCustomersTa
                     <CustomerImagePlaceholder name={customer.name} />
                 }
                 <p>{customer.name}</p>
-                </div>
+            </div>
             </div>
             <p className="text-sm text-gray-500">
                 {customer.email}
