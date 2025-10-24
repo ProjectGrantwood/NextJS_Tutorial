@@ -5,8 +5,9 @@ import { deleteCustomer, type DeleteCustomerState } from "@/app/lib/customer-act
 import { UpdateCustomer, DeleteCustomer } from "@/app/ui/customers/buttons";
 import Image from "next/image";
 import CustomerImagePlaceholder from "@/app/ui/dashboard/customer-image-placeholder";
+import { FormattedCustomersTable } from "@/app/lib/definitions";
 
-export function CustomerRow({ customer }: { customer: any }) {
+export function CustomerRow({ customer }: { customer: FormattedCustomersTable }) {
   const initial: DeleteCustomerState = { message: null };
   const action = deleteCustomer.bind(null, customer.id);
   const [state, formAction] = useActionState(action, initial);
@@ -61,7 +62,7 @@ export function CustomerRow({ customer }: { customer: any }) {
   );
 }
 
-export function MobileCustomerRow({ customer }: { customer: any }) {
+export function MobileCustomerRow({ customer }: { customer: FormattedCustomersTable }) {
   const initial: DeleteCustomerState = { message: null };
   const action = deleteCustomer.bind(null, customer.id);
   const [state, formAction] = useActionState(action, initial);
