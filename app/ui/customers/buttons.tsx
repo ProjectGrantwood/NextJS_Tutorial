@@ -1,7 +1,7 @@
+'use client';
+
 import Link from 'next/link';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { deleteCustomer } from '@/app/lib/actions';
-
 export function AddCustomer() {
   return (
     <Link
@@ -25,15 +25,20 @@ export function UpdateCustomer({ id }: { id: string }) {
   );
 }
 
-export function DeleteCustomer({ id }: { id: string }) {
-  const deleteCustomerWithId = deleteCustomer.bind(null, id);
+export function DeleteCustomer({ formAction, describedBy }: {
+  formAction: (formData: FormData) => void;
+  describedBy?: string;
+}) {
   return (
-    <form action={deleteCustomerWithId}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+    <form action={formAction}>
+      <button
+        type="submit"
+        className="rounded-md border p-2 hover:bg-gray-100"
+        aria-describedby={describedBy}
+      >
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-4" />
       </button>
     </form>
   );
-  
 }

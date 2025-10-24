@@ -1,20 +1,19 @@
 'use client';
 
+import { CustomerForm } from '@/app/lib/definitions';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import { addCustomer, AddCustomerState } from '@/app/lib/customer-actions';
-
+import { updateCustomer, CustomerState } from '@/app/lib/customer-actions';
 import { useActionState } from 'react';
 
-export default function AddCustomerForm() {
-  
-  const initialState: AddCustomerState = { message: null, errors: {} };
-  const [state, formAction] = useActionState(addCustomer, initialState);
-  
+export default function EditCustomerForm({customer }: {customer: CustomerForm}) {
+  const initialState: CustomerState = { errors: {}, message: null };
+  const updateCustomerWithId = updateCustomer.bind(null, customer.id);
+  const [state, formAction] = useActionState(updateCustomerWithId, initialState);
   return (
     <form action={formAction}>
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
-            {/* Customer Name */}
+        {/* Customer Name */}
             <div className="mb-4">
                 <label htmlFor="customerName" className="mb-2 block text-sm font-medium">
                     Customer Name
@@ -25,6 +24,7 @@ export default function AddCustomerForm() {
                             id="customerName"
                             name="name"
                             type="string"
+                            defaultValue={customer.name}
                             placeholder="Enter Customer Name"
                             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             aria-describedby="name-error"
@@ -40,7 +40,7 @@ export default function AddCustomerForm() {
                 </div>
             </div>
 
-            {/* Customer Email */}
+        {/* Customer Email */}
             <div className="mb-4">
                 <label htmlFor="customerEmail" className="mb-2 block text-sm font-medium">
                     Customer Email
@@ -51,11 +51,13 @@ export default function AddCustomerForm() {
                         id="customerEmail"
                         name="email"
                         type="string"
+                        defaultValue={customer.email}
                         placeholder="Enter Customer Email"
                         className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                         aria-describedby="email-error"
                     />
                 </div>
+            </div>
                 <div id="email-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.email?.map((error: string) => (
                         <p className="mt-2 text-sm text-red-500" key={error}>
@@ -64,18 +66,16 @@ export default function AddCustomerForm() {
                     ))}
                 </div>
             </div>
-            
-            <div className="mt-6 flex justify-end gap-4">
-                <Link
-                href="/dashboard/customers"
-                className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-                >
-                Cancel
-                </Link>
-                <Button type="submit">Add New Customer</Button>
-            </div>
         </div>
-        </div>
+      <div className="mt-6 flex justify-end gap-4">
+        <Link
+          href="/dashboard/customers"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        >
+          Cancel
+        </Link>
+        <Button type="submit">Edit Customer</Button>
+      </div>
     </form>
-  )
+  );
 }

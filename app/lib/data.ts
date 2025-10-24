@@ -168,7 +168,6 @@ export async function fetchCustomers() {
       FROM customers
       ORDER BY name ASC
     `;
-
     return customers;
   } catch (err) {
     console.error('Database Error:', err);
@@ -203,6 +202,7 @@ export async function fetchFilteredCustomers(query: string, currentPage: number)
       total_pending: formatCurrency(customer.total_pending),
       total_paid: formatCurrency(customer.total_paid),
     }));
+    
 
     return customers;
   } catch (err) {
@@ -213,16 +213,37 @@ export async function fetchFilteredCustomers(query: string, currentPage: number)
 
 export async function customerHasInvoices(id: string) {
   try {
+  const data = await sql`
+    SELECT
+      id,
+      (SELECT COUNT(*) FROM invoices WHERE invoices.customer_id = customers.id) AS invoice_count
+    FROM customers
+    WHERE id = ${id};
+  `;
+  console.log(data[0].invoice_count);
+    return Number(data[0].invoice_count);
+  } catch (err) {
+    console.log('Database Error: ', err);
+    throw new Error(`Failed to count invoices associated with id ${id}`)
+  }
+}
+
+export async function fetchCustomerById(id: string) {
+  try {
     const data = await sql`
-      SELECT customers.id, COUNT(invoices.id)
+      SELECT id, name, email, image_url
       FROM customers
-      LEFT JOIN invoices ON customers.id = invoices.customer_id
-      WHERE customers.id = ${id}
-    `
-    return Number(data[0].count);
+      WHERE id = ${id}
+    `;
+    return {
+      id: data[0]['id'],
+      name: data[0]['name'],
+      email: data[0]['email'],
+      image_url: data[0]['image_url']
+    }
   } catch (err) {
     console.error('Database Error: ', err);
-    throw new Error(`Failed to count invoices associated with id ${id}`)
+    throw new Error (`Failed to find customer associated with id ${id}`);
   }
 }
 
