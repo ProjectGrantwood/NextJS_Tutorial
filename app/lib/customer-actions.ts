@@ -68,6 +68,7 @@ export async function addCustomer(prevState: CustomerState, formData: FormData) 
     }
     
     revalidatePath('/dashboard/customers')
+    revalidatePath('/dashboard/invoices')
     redirect('/dashboard/customers')
 }
 
@@ -104,6 +105,7 @@ export async function updateCustomer(customerId: string, prevState: CustomerStat
     }
     
     revalidatePath('/dashboard/customers');
+    revalidatePath('/dashboard/invoices');
     redirect('/dashboard/customers');
 }
 
@@ -119,6 +121,7 @@ export async function deleteCustomer(id: string, _prev: DeleteCustomerState): Pr
         return {message: "Cannot delete: customer has invoices associated with their account."};
     }
     await sql`DELETE FROM customers WHERE id = ${id}`;
-    revalidatePath("/dashboard/customers");
+    revalidatePath('/dashboard/customers');
+    revalidatePath('/dashboard/invoices')
     return {message: null};
 }
